@@ -1,7 +1,9 @@
 PVector cameraPos, renderSpace, rotation, up;
 float zoom;
+PShape s;
 
 void setup() {
+  s = loadShape("Spider.obj");
   background(20);
   up = new PVector(0, 1, 0);
   cameraPos = new PVector(0, 0, (height/2.0) / tan(PI*30.0 / 180.0));
@@ -29,8 +31,10 @@ void draw() {
   cameraPos.z = renderSpace.z + zoom * cos(rotation.y) * cos(rotation.x);
 
   camera(cameraPos.x, cameraPos.y, cameraPos.z, renderSpace.x, renderSpace.y, renderSpace.z, up.x, up.y, up.z);
+  rotateX(radians(180)); // FOR SPIDER OBJ
+  shape(s, 0, 0);
 
-  box(200);
+  //box(200);
 
   if (keyPressed) {
     if (keyCode == LEFT) renderSpace.x -= 5; // panning around object render space

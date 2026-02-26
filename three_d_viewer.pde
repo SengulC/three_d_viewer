@@ -1,12 +1,12 @@
 PVector renderSpace, cameraPos;
-PShape s;
+PShape initShape;
 int degreeX, degreeY, degreeZ = 0;
 float zoom = 500;
-//String lightState = "dir";
+String lightState = "r";
 //{"r", "g", "b", "dir"};
 
 void setup() {
-  s = loadShape("./spider/Spider.obj");
+  initShape = loadShape("./spider/Spider.obj");
   background(20);
   cameraPos = new PVector(0, 0, (height/2.0) / tan(PI*30.0 / 180.0));
   renderSpace = new PVector(0, 0, 0);
@@ -20,8 +20,8 @@ void draw() {
   rotateY(radians(degreeY));
   rotateZ(radians(degreeZ));
 
-  //switch(lightState)
-  shape(s, 0, 0);
+  renderLight();
+  shape(initShape, 0, 0);
 
   if (keyPressed) {
     processMovement();
@@ -46,12 +46,12 @@ void processMovement() {
   if (keyCode == UP) renderSpace.y -= 5;
   if (keyCode == DOWN) renderSpace.y += 5;
 
-  if (key == 'S') degreeX -= 5;
-  if (key == 'W') degreeX += 5;
-  if (key == 'A') degreeY -= 5;
-  if (key == 'D') degreeY += 5;
-  if (key == 'X') degreeZ -= 5;
-  if (key == 'Z') degreeZ += 5;
+  if (key == 'S' || key == 's') degreeX -= 5;
+  if (key == 'W' || key == 'w') degreeX += 5;
+  if (key == 'A' || key == 'a') degreeY -= 5;
+  if (key == 'D' || key == 'd') degreeY += 5;
+  if (key == 'X' || key == 'x') degreeZ -= 5;
+  if (key == 'Z' || key == 'z') degreeZ += 5;
 }
 
 // camera space navigation via MOUSE x and y
@@ -76,4 +76,12 @@ void keyPressed() {
     pointLight(51, 102, 126, 140, 160, 144);
   if (key == '1')
     pointLight(255, 0, 0, 140, 160, 144);
+}
+
+void renderLight() {
+  switch(lightState) {
+  case "r":
+    pointLight(255, 0, 0, 140, 160, 144);
+    break;
+  }
 }

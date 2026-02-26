@@ -5,7 +5,7 @@ void folderSelected(File selection) {
   } else {
     File objFile = findObjFile(selection);
     if (objFile != null) {
-      s = loadShape(objFile.getAbsolutePath());
+      initShape = loadShape(objFile.getAbsolutePath());
     } else {
       println("No .obj file found in the selected folder.");
     }

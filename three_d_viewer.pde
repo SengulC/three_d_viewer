@@ -1,6 +1,7 @@
 PVector renderSpace, cameraPos;
 PShape s;
 int degreeX, degreeY, degreeZ = 0;
+float zoom = 500;
 
 void setup() {
   s = loadShape("./spider/Spider.obj");
@@ -11,7 +12,7 @@ void setup() {
 }
 
 void draw() {
-  camera(cameraPos.x, cameraPos.y, cameraPos.z, renderSpace.x, renderSpace.y, renderSpace.z, 0, 1, 0);
+  camera(cameraPos.x, cameraPos.y, zoom, renderSpace.x, renderSpace.y, renderSpace.z, 0, 1, 0);
   background(20);
 
   rotateX(radians(degreeX));
@@ -21,6 +22,9 @@ void draw() {
   shape(s, 0, 0);
 
   if (keyPressed) {
+    if (keyCode == BACKSPACE)
+      selectFolder("Select a folder:", "folderSelected");
+
     if (keyCode == LEFT) renderSpace.x -= 5; // panning around object in render space
     if (keyCode == RIGHT) renderSpace.x += 5;
     if (keyCode == UP) renderSpace.y -= 5;
@@ -36,12 +40,14 @@ void draw() {
     if (key == 'Z') degreeZ += 5;
 
     if (key == 'R') {
-      print("hello");
-      selectFolder("Select a folder:", "folderSelected");
-
       // reset
-      //cameraPos = new PVector(0, 0, (height/2.0) / tan(PI*30.0 / 180.0));
-      //renderSpace = new PVector(0, 0, 0);
+      cameraPos = new PVector(0, 0, (height/2.0) / tan(PI*30.0 / 180.0));
+      renderSpace = new PVector(0, 0, 0);
+      zoom = 500;
     }
   }
+}
+
+void mouseWheel(MouseEvent event) {
+  zoom += event.getCount() * 10;
 }

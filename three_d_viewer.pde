@@ -2,6 +2,8 @@ PVector renderSpace, cameraPos;
 PShape s;
 int degreeX, degreeY, degreeZ = 0;
 float zoom = 500;
+//String lightState = "dir";
+//{"r", "g", "b", "dir"};
 
 void setup() {
   s = loadShape("./spider/Spider.obj");
@@ -14,17 +16,19 @@ void setup() {
 void draw() {
   camera(cameraPos.x, cameraPos.y, zoom, renderSpace.x, renderSpace.y, renderSpace.z, 0, 1, 0);
   background(20);
-  //directionalLight(255, 245, 126, 1, 0, 0);
   rotateX(radians(degreeX));
   rotateY(radians(degreeY));
   rotateZ(radians(degreeZ));
 
+  //switch(lightState)
   shape(s, 0, 0);
 
   if (keyPressed) {
+    // loading a new object
     if (keyCode == BACKSPACE)
       selectFolder("Select a folder:", "folderSelected");
 
+    // camera and render space navigation via ASDW, XZ, ARROW BUTTONS
     if (keyCode == LEFT) renderSpace.x -= 5; // panning around object in render space
     if (keyCode == RIGHT) renderSpace.x += 5;
     if (keyCode == UP) renderSpace.y -= 5;
@@ -32,15 +36,13 @@ void draw() {
 
     if (key == 'S') degreeX -= 5;
     if (key == 'W') degreeX += 5;
-
     if (key == 'A') degreeY -= 5;
     if (key == 'D') degreeY += 5;
-
     if (key == 'X') degreeZ -= 5;
     if (key == 'Z') degreeZ += 5;
 
+    // reset camera, render space and zoom
     if (key == 'R') {
-      // reset
       cameraPos = new PVector(0, 0, (height/2.0) / tan(PI*30.0 / 180.0));
       renderSpace = new PVector(0, 0, 0);
       zoom = 500;
@@ -48,6 +50,26 @@ void draw() {
   }
 }
 
+// camera space navigation via MOUSE x and y
+void mouseDragged() {
+  if (mouseX < pmouseX)
+    degreeY -=5;
+  if (mouseX > pmouseX)
+    degreeY +=5;
+  if (mouseY < pmouseY)
+    degreeX -=5;
+  if (mouseX > pmouseX)
+    degreeX +=5;
+}
+
+// mousewheel interaction for zooming in/out
 void mouseWheel(MouseEvent event) {
   zoom += event.getCount() * 10;
+}
+
+void keyPressed() {
+  if (key == '0')
+    pointLight(51, 102, 126, 140, 160, 144);
+  if (key == '1')
+    pointLight(255, 0, 0, 140, 160, 144);
 }

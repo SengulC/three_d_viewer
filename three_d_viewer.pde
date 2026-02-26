@@ -14,7 +14,7 @@ void setup() {
 void draw() {
   camera(cameraPos.x, cameraPos.y, zoom, renderSpace.x, renderSpace.y, renderSpace.z, 0, 1, 0);
   background(20);
-
+  //directionalLight(255, 245, 126, 1, 0, 0);
   rotateX(radians(degreeX));
   rotateY(radians(degreeY));
   rotateZ(radians(degreeZ));

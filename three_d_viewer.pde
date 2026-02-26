@@ -24,22 +24,11 @@ void draw() {
   shape(s, 0, 0);
 
   if (keyPressed) {
+    processMovement();
+
     // loading a new object
     if (keyCode == BACKSPACE)
       selectFolder("Select a folder:", "folderSelected");
-
-    // camera and render space navigation via ASDW, XZ, ARROW BUTTONS
-    if (keyCode == LEFT) renderSpace.x -= 5; // panning around object in render space
-    if (keyCode == RIGHT) renderSpace.x += 5;
-    if (keyCode == UP) renderSpace.y -= 5;
-    if (keyCode == DOWN) renderSpace.y += 5;
-
-    if (key == 'S') degreeX -= 5;
-    if (key == 'W') degreeX += 5;
-    if (key == 'A') degreeY -= 5;
-    if (key == 'D') degreeY += 5;
-    if (key == 'X') degreeZ -= 5;
-    if (key == 'Z') degreeZ += 5;
 
     // reset camera, render space and zoom
     if (key == 'R') {
@@ -48,6 +37,21 @@ void draw() {
       zoom = 500;
     }
   }
+}
+
+void processMovement() {
+  // camera and render space navigation via ASDW, XZ, ARROW BUTTONS
+  if (keyCode == LEFT) renderSpace.x -= 5; // panning around object in render space
+  if (keyCode == RIGHT) renderSpace.x += 5;
+  if (keyCode == UP) renderSpace.y -= 5;
+  if (keyCode == DOWN) renderSpace.y += 5;
+
+  if (key == 'S') degreeX -= 5;
+  if (key == 'W') degreeX += 5;
+  if (key == 'A') degreeY -= 5;
+  if (key == 'D') degreeY += 5;
+  if (key == 'X') degreeZ -= 5;
+  if (key == 'Z') degreeZ += 5;
 }
 
 // camera space navigation via MOUSE x and y

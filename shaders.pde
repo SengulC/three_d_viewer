@@ -28,13 +28,7 @@ void flatShader() {
 
 // make duplicate of obj file with only vertices and faces
 // connect vertices in each face to make a triangle
-void wireframeShader() {
-  String[] objCopied = loadStrings(currentShapePath);
-  PVector[] vertices = new PVector[MAX_INT/2];
-  String[][] faces = new String[objCopied.length][objCopied.length];
-
-  int vertexIndex = 0;
-  int faceIndex = 0;
+void wireframeData() {
   // ITERATE OVER OBJ FILE
   for (int i = 0; i < objCopied.length; i++) {
     // RECORD VERTICES
@@ -42,9 +36,8 @@ void wireframeShader() {
       // v -2.600941 51.171219 -24.912411
       String[] curVertex = split(objCopied[i], " ");
       // [v, -2.600941, 51.171219, -24.912411]
-      vertices[vertexIndex] = new PVector(float(curVertex[1]), float(curVertex[2]), float(curVertex[3]));
+      vertices.add(new PVector(float(curVertex[1]), float(curVertex[2]), float(curVertex[3])));
       // <-2.600941, 51.171219, -24.912411>
-      vertexIndex++;
     }
 
     // RECORD FACES
@@ -56,15 +49,29 @@ void wireframeShader() {
       for (int j = 1; j < verticesInFace.length; j++) {
         cleanedVertices[j-1] = split(verticesInFace[j], "/")[0];
       }
-      faces[faceIndex] = cleanedVertices;
-      faceIndex++;
+      faces.add(cleanedVertices);
     }
   }
-  print(vertices[0]);
-  print("\n");
-  //beginShape(TRIANGLE);
-  //for (String[]face : faces) {
+  //print(faces[0]);
+  //print("\n");
+}
 
-  //}
-  //endShape();
+void wireframeShader() {
+  beginShape();
+  stroke(255);
+  noFill();
+  for (String[] faceVertices : faces) {
+    // faceVertices[0]: 1 33 109 39
+    // for each face, find corresponding vertices
+    // then for each vertex, draw x y z of that vertex
+    for (String indexOfV : faceVertices) {
+      //faceVertices[0][0]: 1
+      if (indexOfV != null) {
+        PVector point = vertices.get(int(indexOfV)-1);
+        if (point != null)
+          vertex(point.x, point.y, point.z);
+      }
+    }
+  }
+  endShape();
 }

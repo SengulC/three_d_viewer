@@ -92,7 +92,6 @@ void keyPressed() {
 
 // LOADING NEW FOLDER, FINDING OBJ FILE WITHIN THAT FOLDER
 void folderSelected(File selection) {
-  print("Hello");
   if (selection == null) {
     println("Window was closed or the user hit cancel.");
   } else {
@@ -100,6 +99,12 @@ void folderSelected(File selection) {
     if (objFile != null) {
       currentShape = loadShape(objFile.getAbsolutePath());
       currentShapePath = objFile.getAbsolutePath();
+
+      // reset and ready wireframe data
+      objCopied = loadStrings(objFile.getAbsolutePath());
+      vertices = new ArrayList<PVector>();
+      faces = new ArrayList<String[]>();
+      wireframeData();
     } else {
       println("No .obj file found in the selected folder.");
     }

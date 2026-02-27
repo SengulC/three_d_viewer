@@ -6,6 +6,10 @@ int degreeX, degreeY, degreeZ = 0;
 float zoom = 500;
 String lightState = "default", drawMode = "default";
 
+String[] objCopied;
+ArrayList<PVector> vertices;
+ArrayList<String[]> faces;
+
 void setup() {
   currentShape = loadShape("./spider/Spider.obj");
   currentShapePath = "./spider/Spider.obj";
@@ -14,6 +18,11 @@ void setup() {
   lightPos = new PVector(0, 0, 0);
   lightDir = new PVector(-1, 0, 0); // x,y,z corresponds to nx,ny,nz in directionalLight()
   size(600, 600, P3D);
+
+  objCopied = loadStrings(currentShapePath);
+  vertices = new ArrayList<PVector>();
+  faces = new ArrayList<String[]>();
+  wireframeData();
 }
 
 void draw() {

@@ -54,8 +54,7 @@ void drawObj() {
     flatShader();
   }
   if (drawMode == "wireframe") //4
-    //wireframeShader();
-    shape(currentShape, 0, 0);
+    wireframeShader();
 }
 
 void renderLight() {

@@ -35,9 +35,7 @@ void wireframeData() {
     if (objCopied[i].startsWith("v ")) {
       // v -2.600941 51.171219 -24.912411
       String[] curVertex = split(objCopied[i], " ");
-      // [v, -2.600941, 51.171219, -24.912411]
       vertices.add(new PVector(float(curVertex[1]), float(curVertex[2]), float(curVertex[3])));
-      // <-2.600941, 51.171219, -24.912411>
     }
 
     // RECORD FACES
@@ -52,8 +50,6 @@ void wireframeData() {
       faces.add(cleanedVertices);
     }
   }
-  //print(faces[0]);
-  //print("\n");
 }
 
 void wireframeShader() {
@@ -62,11 +58,9 @@ void wireframeShader() {
     beginShape();
     stroke(255);
     noFill();
-    // faceVertices[0]: 1 33 109 39
     // for each face, find corresponding vertices
     // then for each vertex, draw x y z of that vertex
     for (String indexOfV : faceVertices) {
-      //faceVertices[0][0]: 1
       if (indexOfV != null) {
         PVector point = vertices.get(int(indexOfV)-1);
         if (point != null)

@@ -46,10 +46,27 @@ void draw() {
 void drawObj() {
   if (drawMode == "default") //1
     shape(initShape, 0, 0);
-  if (drawMode == "wireframe") //2
-    shape(initShape, 0, 0);
+  if (drawMode == "pointcloud") //2
+    wireframeShader();
   if (drawMode == "flat") { //3
     shape(initShape, 0, 0);
+  }
+  if (drawMode == "wireframe")
+    shape(initShape, 0, 0);
+}
+
+void wireframeShader() {
+  int children = initShape.getChildCount();
+  for (int i = 0; i < children; i++) {
+    PShape child = initShape.getChild(i);
+    int total = child.getVertexCount();
+
+    for (int j = 0; j < total; j++) {
+      PVector vertex = child.getVertex(j);
+      //stroke((frameCount + (i+1)*j) % 255);
+      stroke(255);
+      point(vertex.x, vertex.y, vertex.z);
+    }
   }
 }
 

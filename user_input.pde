@@ -57,10 +57,13 @@ void keyPressed() {
     drawMode ="default";
     break;
   case '2':
-    drawMode ="wireframe";
+    drawMode ="pointcloud";
     break;
   case '3':
     drawMode ="flat";
+    break;
+  case '4':
+    drawMode ="wireframe";
     break;
 
     // lighting modes

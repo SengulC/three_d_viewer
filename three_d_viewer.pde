@@ -18,9 +18,6 @@ void setup() {
 void draw() {
   camera(cameraPos.x, cameraPos.y, zoom, 0, 0, 0, 0, 1, 0);
   background(20);
-  rotateX(radians(degreeX));
-  rotateY(radians(degreeY));
-  rotateZ(radians(degreeZ));
 
   if (keyPressed) {
     processMovement();
@@ -39,81 +36,12 @@ void draw() {
   }
 
   renderLight();
+
+  rotateX(radians(degreeX));
+  rotateY(radians(degreeY));
+  rotateZ(radians(degreeZ));
+
   shape(initShape, 0, 0);
-}
-
-void processMovement() {
-  // move lights around via ARROW BUTTONS
-  if (keyCode == LEFT)
-    if (lightDirectional)
-      lightDir.x = -1;
-    else
-      lightPos.x -= 5;
-  if (keyCode == RIGHT)
-    if (lightDirectional)
-      lightDir.x = 1;
-    else
-      lightPos.x += 5;
-  if (keyCode == UP)
-    if (lightDirectional)
-      lightDir.y = 1;
-    else
-      lightPos.y -= 5;
-  if (keyCode == DOWN)
-    if (lightDirectional)
-      lightDir.y = -1;
-    else
-      lightPos.y += 5;
-
-  // camera  navigation via ASDW, XZ
-  if (key == 'S' || key == 's') degreeX -= 5;
-  if (key == 'W' || key == 'w') degreeX += 5;
-  if (key == 'A' || key == 'a') degreeY -= 5;
-  if (key == 'D' || key == 'd') degreeY += 5;
-  if (key == 'X' || key == 'x') degreeZ -= 5;
-  if (key == 'Z' || key == 'z') degreeZ += 5;
-}
-
-// camera space navigation via MOUSE x and y
-void mouseDragged() {
-  if (mouseX < pmouseX)
-    degreeY -=5;
-  if (mouseX > pmouseX)
-    degreeY +=5;
-  if (mouseY < pmouseY)
-    degreeX -=5;
-  if (mouseX > pmouseX)
-    degreeX +=5;
-}
-
-// mousewheel interaction for zooming in/out
-void mouseWheel(MouseEvent event) {
-  zoom += event.getCount() * 10;
-}
-
-void keyPressed() {
-  switch(key) {
-  case '0':
-    lightState = "r";
-    lightDirectional = false;
-    break;
-  case '9':
-    lightState = "g";
-    lightDirectional = false;
-    break;
-  case '8':
-    lightState = "b";
-    lightDirectional = false;
-    break;
-  case '7':
-    lightState = "dir";
-    lightDirectional = true;
-    break;
-  case '6':
-    lightState = "default";
-    lightDirectional = false;
-    break;
-  }
 }
 
 void renderLight() {

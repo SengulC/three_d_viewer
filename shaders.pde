@@ -57,10 +57,11 @@ void wireframeData() {
 }
 
 void wireframeShader() {
-  beginShape();
-  stroke(255);
-  noFill();
+
   for (String[] faceVertices : faces) {
+    beginShape();
+    stroke(255);
+    noFill();
     // faceVertices[0]: 1 33 109 39
     // for each face, find corresponding vertices
     // then for each vertex, draw x y z of that vertex
@@ -72,6 +73,6 @@ void wireframeShader() {
           vertex(point.x, point.y, point.z);
       }
     }
+    endShape();
   }
-  endShape();
 }

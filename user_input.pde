@@ -53,6 +53,16 @@ void mouseWheel(MouseEvent event) {
 void keyPressed() {
   switch(key) {
     // shading modes
+  case'1':
+    drawMode ="default";
+    break;
+  case '2':
+    drawMode ="wireframe";
+    break;
+  case '3':
+    drawMode ="flat";
+    break;
+
     // lighting modes
   case '0':
     lightState = "r";

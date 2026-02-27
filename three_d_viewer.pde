@@ -3,8 +3,7 @@ boolean lightDirectional;
 PShape initShape;
 int degreeX, degreeY, degreeZ = 0;
 float zoom = 500;
-String lightState = "default";
-//{"r", "g", "b", "dir"};
+String lightState = "default", drawMode = "default";
 
 void setup() {
   initShape = loadShape("./spider/Spider.obj");
@@ -37,11 +36,21 @@ void draw() {
 
   renderLight();
 
+  // rotation transforms before obj rendering to apply onto it
   rotateX(radians(degreeX));
   rotateY(radians(degreeY));
   rotateZ(radians(degreeZ));
+  drawObj();
+}
 
-  shape(initShape, 0, 0);
+void drawObj() {
+  if (drawMode == "default") //1
+    shape(initShape, 0, 0);
+  if (drawMode == "wireframe") //2
+    shape(initShape, 0, 0);
+  if (drawMode == "flat") { //3
+    shape(initShape, 0, 0);
+  }
 }
 
 void renderLight() {

@@ -1,3 +1,5 @@
+// SHADER FUNCTIONS: FLAT, POINTCLOUD, WIREFRAME
+
 void pointcloudShader() {
   int children = currentShape.getChildCount();
   for (int i = 0; i < children; i++) {
@@ -6,7 +8,6 @@ void pointcloudShader() {
 
     for (int j = 0; j < total; j++) {
       PVector vertex = child.getVertex(j);
-      //stroke((frameCount + (i+1)*j) % 255);
       stroke(255);
       point(vertex.x, vertex.y, vertex.z);
     }
@@ -53,7 +54,6 @@ void wireframeData() {
 }
 
 void wireframeShader() {
-
   for (String[] faceVertices : faces) {
     beginShape();
     stroke(255);

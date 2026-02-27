@@ -1,3 +1,5 @@
+// MAIN CODE FILE WITH SETUP, DRAW FUNCTIONS AND GLOBAL VAR.S
+
 PVector lightPos, cameraPos, lightDir;
 boolean lightDirectional;
 PShape currentShape;

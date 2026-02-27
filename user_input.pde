@@ -1,5 +1,4 @@
 // PROCESSING LIGHT AND CAMERA MOVEMENT VIA KEYBOARD INPUT
-
 void processMovement() {
   // move lights around via ARROW BUTTONS
   if (keyCode == LEFT)

@@ -98,7 +98,8 @@ void folderSelected(File selection) {
   } else {
     File objFile = findObjFile(selection);
     if (objFile != null) {
-      initShape = loadShape(objFile.getAbsolutePath());
+      currentShape = loadShape(objFile.getAbsolutePath());
+      currentShapePath = objFile.getAbsolutePath();
     } else {
       println("No .obj file found in the selected folder.");
     }

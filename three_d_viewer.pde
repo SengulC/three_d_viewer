@@ -1,12 +1,14 @@
 PVector lightPos, cameraPos, lightDir;
 boolean lightDirectional;
-PShape initShape;
+PShape currentShape;
+String currentShapePath;
 int degreeX, degreeY, degreeZ = 0;
 float zoom = 500;
 String lightState = "default", drawMode = "default";
 
 void setup() {
-  initShape = loadShape("./spider/Spider.obj");
+  currentShape = loadShape("./spider/Spider.obj");
+  currentShapePath = "./spider/Spider.obj";
   background(20);
   cameraPos = new PVector(0, 0, (height/2.0) / tan(PI*30.0 / 180.0));
   lightPos = new PVector(0, 0, 0);
@@ -45,29 +47,15 @@ void draw() {
 
 void drawObj() {
   if (drawMode == "default") //1
-    shape(initShape, 0, 0);
+    shape(currentShape, 0, 0);
   if (drawMode == "pointcloud") //2
-    wireframeShader();
+    pointcloudShader();
   if (drawMode == "flat") { //3
-    shape(initShape, 0, 0);
+    flatShader();
   }
-  if (drawMode == "wireframe")
-    shape(initShape, 0, 0);
-}
-
-void wireframeShader() {
-  int children = initShape.getChildCount();
-  for (int i = 0; i < children; i++) {
-    PShape child = initShape.getChild(i);
-    int total = child.getVertexCount();
-
-    for (int j = 0; j < total; j++) {
-      PVector vertex = child.getVertex(j);
-      //stroke((frameCount + (i+1)*j) % 255);
-      stroke(255);
-      point(vertex.x, vertex.y, vertex.z);
-    }
-  }
+  if (drawMode == "wireframe") //4
+    //wireframeShader();
+    shape(currentShape, 0, 0);
 }
 
 void renderLight() {

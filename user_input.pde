@@ -22,7 +22,7 @@ void processMovement() {
     else
       lightPos.y += 5;
 
-  // camera  navigation via ASDW, XZ
+  // obj rotation via ASDW, XZ
   if (key == 'S' || key == 's') degreeX -= 5;
   if (key == 'W' || key == 'w') degreeX += 5;
   if (key == 'A' || key == 'a') degreeY -= 5;
@@ -31,7 +31,7 @@ void processMovement() {
   if (key == 'Z' || key == 'z') degreeZ += 5;
 }
 
-// CAMERA MOVEMENT VIA MOUSE INPUT
+// OBJECT ROTATION VIA MOUSE INPUT
 void mouseDragged() {
   if (mouseX < pmouseX)
     degreeY -=5;
